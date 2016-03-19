@@ -1,9 +1,12 @@
 package dk.fitfit.mybiz.business.service;
 
+import com.google.common.collect.Lists;
 import dk.fitfit.mybiz.business.domain.Expense;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ExpenseService implements ExpenseServiceInterface {
@@ -19,8 +22,8 @@ public class ExpenseService implements ExpenseServiceInterface {
 		return expense;
 	}
 
-	public Iterable<Expense> findAll() {
-		return null;
+	public List<Expense> findAll() {
+		return Lists.newArrayList(findOne(1), findOne(2));
 	}
 
 }
