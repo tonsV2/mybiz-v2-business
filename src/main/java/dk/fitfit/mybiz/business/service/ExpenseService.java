@@ -11,11 +11,12 @@ public class ExpenseService implements ExpenseServiceInterface {
 
 	public Expense findOne(final long id) {
 		Expense expense = new Expense();
-		expense.setId(666L);
+		expense.setId(id);
 		return expense;
 	}
 
 	public Iterable<Expense> findAll() {
 		return null;
 	}
+
 }
