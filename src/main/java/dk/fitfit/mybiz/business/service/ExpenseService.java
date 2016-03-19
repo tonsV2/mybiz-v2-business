@@ -12,6 +12,10 @@ public class ExpenseService implements ExpenseServiceInterface {
 	public Expense findOne(final long id) {
 		Expense expense = new Expense();
 		expense.setId(id);
+		expense.setName("Name");
+		expense.setDescription("Description");
+		expense.setPrice(12D);
+		expense.setAmount(2);
 		return expense;
 	}
 
