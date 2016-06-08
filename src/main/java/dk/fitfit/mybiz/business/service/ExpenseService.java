@@ -26,4 +26,8 @@ public class ExpenseService implements ExpenseServiceInterface {
 		return Lists.newArrayList(findOne(1), findOne(2));
 	}
 
+	public Expense save(final Expense expense) {
+		return expense;
+	}
+
 }

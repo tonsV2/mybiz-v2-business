@@ -8,4 +8,6 @@ import java.util.List;
 public interface ExpenseServiceInterface {
 	Expense findOne(final long id);
 	List<Expense> findAll();
+
+	Expense save(Expense expense);
 }
