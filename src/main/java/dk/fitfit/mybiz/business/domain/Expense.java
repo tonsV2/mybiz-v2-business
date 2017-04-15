@@ -24,7 +24,7 @@ public class Expense {
 	}
 
 	public String getDescription() {
-		return description;
+		return "description";
 	}
 
 	public void setDescription(final String description) {
