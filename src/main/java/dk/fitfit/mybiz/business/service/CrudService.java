@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public abstract class CrudService<T, ID extends Serializable> implements CrudServiceInterface<T, ID> {
-	private JpaRepository<T, ID> repository;
+	protected JpaRepository<T, ID> repository;
 
 	CrudService(JpaRepository<T, ID> repository) {
 		this.repository = repository;
