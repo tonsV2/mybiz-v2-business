@@ -1,5 +1,7 @@
 package dk.fitfit.mybiz.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Product {
 	private String description;
 	private double price;
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore // TODO: Prevent showing of which orders contains this product
 	private List<OrderEntity> orderEntity;
 
 	public long getId() {
