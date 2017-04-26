@@ -1,11 +1,18 @@
 package dk.fitfit.mybiz.business.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Expense {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String description;
 	private double price;
 	private int amount = 1;
+	@OneToOne
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -45,5 +52,13 @@ public class Expense {
 
 	public void setAmount(final int amount) {
 		this.amount = amount;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
