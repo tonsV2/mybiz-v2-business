@@ -18,7 +18,7 @@ public class Client {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<Order> order;
+	private List<Order> orders;
 
 	public long getId() {
 		return id;
@@ -44,11 +44,11 @@ public class Client {
 		this.email = email;
 	}
 
-	public List<Order> getOrder() {
-		return order;
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setOrder(List<Order> order) {
-		this.order = order;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 }

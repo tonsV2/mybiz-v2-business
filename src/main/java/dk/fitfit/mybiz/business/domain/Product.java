@@ -15,7 +15,7 @@ public class Product {
 	private double price;
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore // TODO: Prevent showing of which orders contains this product
-	private List<OrderEntity> orderEntity;
+	private List<OrderEntity> orderEntities;
 
 	public long getId() {
 		return id;
@@ -49,11 +49,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public List<OrderEntity> getOrderEntity() {
-		return orderEntity;
+	public List<OrderEntity> getOrderEntities() {
+		return orderEntities;
 	}
 
-	public void setOrderEntity(List<OrderEntity> orderEntity) {
-		this.orderEntity = orderEntity;
+	public void setOrderEntities(List<OrderEntity> orderEntities) {
+		this.orderEntities = orderEntities;
 	}
 }

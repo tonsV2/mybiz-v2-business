@@ -11,7 +11,7 @@ public class Expense {
 	private String description;
 	private double price;
 	private int amount = 1;
-	@OneToOne
+	@ManyToOne
 	private User user;
 
 	public Long getId() {
