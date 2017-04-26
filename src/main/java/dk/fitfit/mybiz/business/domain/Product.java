@@ -1,18 +1,18 @@
 package dk.fitfit.mybiz.business.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String name;    //  1h of Programming, 1y of hosting, 1h of support, etc.
+	private String name;
 	private String description;
 	private double price;
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<OrderEntity> orderEntity;
 
 	public long getId() {
 		return id;
@@ -44,5 +44,13 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public List<OrderEntity> getOrderEntity() {
+		return orderEntity;
+	}
+
+	public void setOrderEntity(List<OrderEntity> orderEntity) {
+		this.orderEntity = orderEntity;
 	}
 }
