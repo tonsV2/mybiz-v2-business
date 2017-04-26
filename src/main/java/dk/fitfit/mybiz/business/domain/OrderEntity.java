@@ -1,5 +1,7 @@
 package dk.fitfit.mybiz.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -11,6 +13,7 @@ import static javax.persistence.FetchType.EAGER;
 public class OrderEntity implements Serializable {
 	@Id
 	@ManyToOne
+	@JsonIgnore
 	private Order order;
 	@Id
 	@ManyToOne(fetch = EAGER)
