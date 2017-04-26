@@ -13,7 +13,7 @@ public class Product {
 	private String name;
 	private String description;
 	private double price;
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore // TODO: Prevent showing of which orders contains this product
 	private List<OrderEntity> orderEntity;
 

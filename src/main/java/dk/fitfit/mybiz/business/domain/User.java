@@ -1,6 +1,9 @@
 package dk.fitfit.mybiz.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "users") // Postgres doesn't like the table name "user"
 public class User {
@@ -12,8 +15,13 @@ public class User {
 	private String password;
 	@Column(unique = true)
 	private String email;
-//	@ManyToOne
-//	private Order order;
+	@JsonIgnore
+	@OneToMany(
+			mappedBy = "user",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<Order> order;
 
 	public long getId() {
 		return id;
@@ -45,5 +53,13 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
 	}
 }

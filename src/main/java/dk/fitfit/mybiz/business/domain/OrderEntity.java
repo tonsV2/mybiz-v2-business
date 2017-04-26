@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 import static javax.persistence.FetchType.EAGER;
 
+// Inspiration: https://hellokoding.com/jpa-many-to-many-extra-columns-relationship-mapping-example-with-spring-boot-maven-and-mysql/
+
 @Entity
 public class OrderEntity implements Serializable {
 	@Id

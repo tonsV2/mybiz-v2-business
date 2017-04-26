@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
-import static javax.persistence.FetchType.*;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
 
 // https://javasplash.blogspot.dk/2014/10/expected-identifier-sql-statement.html
 @Entity(name = "orders") // Select * from order order by... NO!
@@ -14,11 +14,16 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private long timestamp;
-	@OneToMany(mappedBy = "product", cascade = ALL, orphanRemoval = true, fetch = EAGER)
+	@OneToMany(
+			mappedBy = "order",
+			cascade = ALL,
+			orphanRemoval = true,
+			fetch = EAGER
+	)
 	private List<OrderEntity> orderEntities = new ArrayList<>();
 	@OneToOne
 	private Client client;
-	@OneToOne
+	@ManyToOne
 	private User user;
 
 	//private Conditions conditions;    // Different conditions for different orders
