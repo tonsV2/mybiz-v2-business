@@ -12,13 +12,12 @@ public class ExpenseService extends CrudService<Expense, Long> implements Expens
 	}
 
 	@Override
-	public Expense save(User user, String name, String description, double price, int amount) {
+	public Expense save(User user, String name, String description, double price) {
 		Expense expense = new Expense();
 		expense.setUser(user);
 		expense.setName(name);
 		expense.setDescription(description);
 		expense.setPrice(price);
-		expense.setAmount(amount);
 		return this.save(expense);
 	}
 }

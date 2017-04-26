@@ -10,7 +10,6 @@ public class Expense {
 	private String name;
 	private String description;
 	private double price;
-	private int amount = 1;
 	private long timestamp; // More than just a single ts would probably be nice. Time of registration/booking, time of purchase?
 	@ManyToOne
 	private User user;
@@ -45,14 +44,6 @@ public class Expense {
 
 	public void setPrice(final double price) {
 		this.price = price;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(final int amount) {
-		this.amount = amount;
 	}
 
 	public User getUser() {
