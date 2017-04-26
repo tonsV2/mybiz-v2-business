@@ -12,11 +12,12 @@ public class Client {
 	private long id;
 	private String name;
 	private String email;
+	@ManyToOne
+	private User user;
 	@JsonIgnore
 	@OneToMany(
-			mappedBy = "user",
-			cascade = CascadeType.ALL,
-			orphanRemoval = true
+			mappedBy = "client",
+			cascade = CascadeType.ALL
 	)
 	private List<Order> orders;
 
@@ -42,6 +43,14 @@ public class Client {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<Order> getOrders() {

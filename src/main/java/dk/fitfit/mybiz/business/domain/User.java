@@ -30,6 +30,22 @@ public class User {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
+	private List<Client> clients;
+
+	@JsonIgnore
+	@OneToMany(
+			mappedBy = "user",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<Product> products;
+
+	@JsonIgnore
+	@OneToMany(
+			mappedBy = "user",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
 	private List<Expense> expenses;
 
 	public long getId() {
@@ -70,5 +86,29 @@ public class User {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(List<Expense> expenses) {
+		this.expenses = expenses;
 	}
 }

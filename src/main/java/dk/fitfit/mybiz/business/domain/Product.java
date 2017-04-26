@@ -13,6 +13,8 @@ public class Product {
 	private String name;
 	private String description;
 	private double price;
+	@ManyToOne
+	private User user;
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore // TODO: Prevent showing of which orders contains this product
 	private List<OrderEntity> orderEntities;
@@ -47,6 +49,14 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<OrderEntity> getOrderEntities() {
