@@ -12,6 +12,8 @@ public class User {
 	private String password;
 	@Column(unique = true)
 	private String email;
+//	@ManyToOne
+//	private Order order;
 
 	public long getId() {
 		return id;

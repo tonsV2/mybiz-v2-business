@@ -7,6 +7,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.*;
 
+// https://javasplash.blogspot.dk/2014/10/expected-identifier-sql-statement.html
 @Entity(name = "orders") // Select * from order order by... NO!
 public class Order {
 	@Id
