@@ -1,6 +1,9 @@
 package dk.fitfit.mybiz.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Client {
@@ -9,8 +12,13 @@ public class Client {
 	private long id;
 	private String name;
 	private String email;
-//	@ManyToOne
-//	private Order order;
+	@JsonIgnore
+	@OneToMany(
+			mappedBy = "user",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<Order> order;
 
 	public long getId() {
 		return id;
@@ -34,5 +42,13 @@ public class Client {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
 	}
 }

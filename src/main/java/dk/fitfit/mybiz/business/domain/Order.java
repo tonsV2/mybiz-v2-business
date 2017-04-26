@@ -21,7 +21,7 @@ public class Order {
 			fetch = EAGER
 	)
 	private List<OrderEntity> orderEntities = new ArrayList<>();
-	@OneToOne
+	@ManyToOne
 	private Client client;
 	@ManyToOne
 	private User user;
