@@ -28,6 +28,11 @@ public abstract class CrudService<T, ID extends Serializable> implements CrudSer
 	}
 
 	@Override
+	public List<T> save(List<T> entities) {
+		return repository.save(entities);
+	}
+
+	@Override
 	public void delete(ID id) {
 		repository.delete(id);
 	}
