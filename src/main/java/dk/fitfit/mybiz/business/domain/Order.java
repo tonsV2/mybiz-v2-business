@@ -28,6 +28,21 @@ public class Order {
 
 	//private Conditions conditions;    // Different conditions for different orders
 
+	public double getVat() {
+		return getPrice() * 0.2;
+	}
+
+	public double getPriceWithoutVat() {
+		return getPrice() * 0.8;
+	}
+
+	public double getPrice() {
+		return orderEntities
+				.stream()
+				.mapToDouble(OrderEntity::getPrice)
+				.sum();
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -68,7 +83,7 @@ public class Order {
 		this.user = user;
 	}
 
-	public void addProduct(Product product, int quantity) {
+	public void addEntity(Product product, int quantity) {
 		OrderEntity orderEntity = new OrderEntity(this, product, quantity);
 		orderEntities.add(orderEntity);
 	}

@@ -13,10 +13,11 @@ public class Product {
 	private String name;
 	private String description;
 	private double price;
+	@JsonIgnore
 	@ManyToOne
 	private User user;
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore // TODO: Prevent showing of which orders contains this product
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OrderEntity> orderEntities;
 
 	public long getId() {

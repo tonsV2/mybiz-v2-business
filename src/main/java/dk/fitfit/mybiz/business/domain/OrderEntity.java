@@ -31,6 +31,10 @@ public class OrderEntity implements Serializable {
 		this.quantity = quantity;
 	}
 
+	public double getPrice() {
+		return product.getPrice() * quantity;
+	}
+
 	public Order getOrder() {
 		return order;
 	}
