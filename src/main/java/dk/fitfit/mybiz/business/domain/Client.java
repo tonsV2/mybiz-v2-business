@@ -12,6 +12,7 @@ public class Client {
 	private long id;
 	private String name;
 	private String email;
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 	@JsonIgnore

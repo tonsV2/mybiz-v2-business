@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Entity
-public class Expense {
+public class Expense implements Priceable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -19,12 +19,14 @@ public class Expense {
 	@ManyToOne
 	private User user;
 
+	@Override
 	public double getVat() {
 		return getPrice() * 0.2;
 	}
 
-	public double getPriceWithoutVat() {
-		return getPrice() * 0.8;
+	@Override
+	public double getPriceExVat() {
+		return getPrice() - getVat();
 	}
 
 	public Long getId() {
@@ -51,6 +53,7 @@ public class Expense {
 		this.description = description;
 	}
 
+	@Override
 	public double getPrice() {
 		return price;
 	}
