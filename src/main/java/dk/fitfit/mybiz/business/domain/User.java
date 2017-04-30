@@ -3,7 +3,7 @@ package dk.fitfit.mybiz.business.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity(name = "users") // Postgres doesn't like the table name "user"
 public class User {
@@ -16,13 +16,15 @@ public class User {
 	private String password;
 	@Column(unique = true)
 	private String email;
-	@JsonIgnore
-	@OneToMany(
-			mappedBy = "user",
-			cascade = CascadeType.ALL,
-			orphanRemoval = true
-	)
-	private List<Order> orders;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+//			name = "users_roles",
+			joinColumns = @JoinColumn(
+					name = "user_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(
+					name = "role_id", referencedColumnName = "id"))
+//	private Collection<Role> roles;
+	private final Set<Role> roles = new HashSet<>();
 
 	@JsonIgnore
 	@OneToMany(
@@ -30,7 +32,7 @@ public class User {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<Client> clients;
+	private final List<Order> orders = new ArrayList<>();
 
 	@JsonIgnore
 	@OneToMany(
@@ -38,7 +40,7 @@ public class User {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<Product> products;
+	private final List<Client> clients = new ArrayList<>();
 
 	@JsonIgnore
 	@OneToMany(
@@ -46,7 +48,15 @@ public class User {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<Expense> expenses;
+	private final List<Product> products = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(
+			mappedBy = "user",
+//			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private final List<Expense> expenses = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -85,7 +95,7 @@ public class User {
 	}
 
 	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+//		this.orders = orders;
 	}
 
 	public List<Client> getClients() {
@@ -93,7 +103,7 @@ public class User {
 	}
 
 	public void setClients(List<Client> clients) {
-		this.clients = clients;
+//		this.clients = clients;
 	}
 
 	public List<Product> getProducts() {
@@ -101,7 +111,7 @@ public class User {
 	}
 
 	public void setProducts(List<Product> products) {
-		this.products = products;
+//		this.products = products;
 	}
 
 	public List<Expense> getExpenses() {
@@ -109,6 +119,23 @@ public class User {
 	}
 
 	public void setExpenses(List<Expense> expenses) {
-		this.expenses = expenses;
+		this.expenses.retainAll(expenses);
+		this.expenses.addAll(expenses);
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+/*
+		if (this.roles == null) {
+			this.roles = roles;
+		} else {
+			this.roles.retainAll(roles);
+			this.roles.addAll(roles);
+		}
+*/
 	}
 }
