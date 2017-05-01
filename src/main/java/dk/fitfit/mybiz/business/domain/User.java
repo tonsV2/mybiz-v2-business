@@ -23,7 +23,6 @@ public class User {
 					name = "user_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(
 					name = "role_id", referencedColumnName = "id"))
-//	private Collection<Role> roles;
 	private final Set<Role> roles = new HashSet<>();
 
 	@JsonIgnore
@@ -95,7 +94,7 @@ public class User {
 	}
 
 	public void setOrders(List<Order> orders) {
-//		this.orders = orders;
+		this.orders.retainAll(orders);
 	}
 
 	public List<Client> getClients() {
@@ -103,7 +102,7 @@ public class User {
 	}
 
 	public void setClients(List<Client> clients) {
-//		this.clients = clients;
+		this.clients.retainAll(clients);
 	}
 
 	public List<Product> getProducts() {
@@ -111,7 +110,7 @@ public class User {
 	}
 
 	public void setProducts(List<Product> products) {
-//		this.products = products;
+		this.products.retainAll(products);
 	}
 
 	public List<Expense> getExpenses() {
@@ -120,22 +119,13 @@ public class User {
 
 	public void setExpenses(List<Expense> expenses) {
 		this.expenses.retainAll(expenses);
-		this.expenses.addAll(expenses);
 	}
 
-	public Collection<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
 	public void setRoles(Set<Role> roles) {
-//		this.roles = roles;
-/*
-		if (this.roles == null) {
-			this.roles = roles;
-		} else {
-			this.roles.retainAll(roles);
-			this.roles.addAll(roles);
-		}
-*/
+		this.roles.retainAll(roles);
 	}
 }

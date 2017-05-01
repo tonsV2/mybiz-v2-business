@@ -4,7 +4,7 @@ import java.util.List;
 
 //TODO: Better name?
 public class Totals<T extends Priceable> {
-	private List<T> entities;
+	private final List<T> entities;
 
 	public Totals(List<T> entities) {
 		this.entities = entities;

@@ -22,7 +22,7 @@ public class Order implements Priceable {
 			orphanRemoval = true,
 			fetch = EAGER
 	)
-	private List<OrderEntity> orderEntities = new ArrayList<>();
+	private final List<OrderEntity> orderEntities = new ArrayList<>();
 	@ManyToOne
 	private Client client;
 	@JsonIgnore
@@ -70,7 +70,7 @@ public class Order implements Priceable {
 	}
 
 	public void setOrderEntities(List<OrderEntity> orderEntities) {
-		this.orderEntities = orderEntities;
+		this.orderEntities.retainAll(orderEntities);
 	}
 
 	public Client getClient() {

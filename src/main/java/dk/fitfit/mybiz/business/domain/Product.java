@@ -3,6 +3,7 @@ package dk.fitfit.mybiz.business.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Product {
 	private User user;
 	@JsonIgnore // TODO: Prevent showing of which orders contains this product
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<OrderEntity> orderEntities;
+	private final List<OrderEntity> orderEntities = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -65,6 +66,6 @@ public class Product {
 	}
 
 	public void setOrderEntities(List<OrderEntity> orderEntities) {
-		this.orderEntities = orderEntities;
+		this.orderEntities.retainAll(orderEntities);
 	}
 }

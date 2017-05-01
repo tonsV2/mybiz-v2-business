@@ -3,7 +3,8 @@ package dk.fitfit.mybiz.business.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Role {
@@ -14,7 +15,7 @@ public class Role {
 	private String name;
 	@JsonIgnore
 	@ManyToMany(mappedBy = "roles")
-	private Collection<User> users;
+	private List<User> users = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -32,11 +33,11 @@ public class Role {
 		this.name = name;
 	}
 
-	public Collection<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Collection<User> users) {
-		this.users = users;
+	public void setUsers(List<User> users) {
+		this.users.retainAll(users);
 	}
 }
