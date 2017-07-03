@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.*;
 
-@Entity(name = "users") // Postgres doesn't like the table name "user"
+@Entity //(name = "users") // Postgres doesn't like the table name "user"
+		// @Table doesn't alter hql, with @Entity... Select * from users;
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
