@@ -1,5 +1,7 @@
 package dk.fitfit.mybiz.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,7 @@ import static javax.persistence.FetchType.EAGER;
 
 // https://javasplash.blogspot.dk/2014/10/expected-identifier-sql-statement.html
 @Entity(name = "orders") // Select * from order order by... NO!
-public class Order {
+public class Order implements Priceable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -20,22 +22,26 @@ public class Order {
 			orphanRemoval = true,
 			fetch = EAGER
 	)
-	private List<OrderEntity> orderEntities = new ArrayList<>();
+	private final List<OrderEntity> orderEntities = new ArrayList<>();
 	@ManyToOne
 	private Client client;
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 
 	//private Conditions conditions;    // Different conditions for different orders
 
+	@Override
 	public double getVat() {
 		return getPrice() * 0.2;
 	}
 
-	public double getPriceWithoutVat() {
-		return getPrice() * 0.8;
+	@Override
+	public double getPriceExVat() {
+		return getPrice() - getVat();
 	}
 
+	@Override
 	public double getPrice() {
 		return orderEntities
 				.stream()
@@ -64,7 +70,7 @@ public class Order {
 	}
 
 	public void setOrderEntities(List<OrderEntity> orderEntities) {
-		this.orderEntities = orderEntities;
+		this.orderEntities.retainAll(orderEntities);
 	}
 
 	public Client getClient() {

@@ -3,6 +3,7 @@ package dk.fitfit.mybiz.business.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,6 +13,7 @@ public class Client {
 	private long id;
 	private String name;
 	private String email;
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 	@JsonIgnore
@@ -19,7 +21,7 @@ public class Client {
 			mappedBy = "client",
 			cascade = CascadeType.ALL
 	)
-	private List<Order> orders;
+	private final List<Order> orders = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -58,6 +60,6 @@ public class Client {
 	}
 
 	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+		this.orders.retainAll(orders);
 	}
 }
